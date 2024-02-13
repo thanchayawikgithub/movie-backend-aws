@@ -1,4 +1,5 @@
 import { MovieCategory } from 'src/movie_categories/entities/movie_category.entity';
+import { Review } from 'src/reviews/entities/review.entity';
 import { Showtime } from 'src/showtimes/entities/showtime.entity';
 import {
   Column,
@@ -45,4 +46,7 @@ export class Movie {
 
   @ManyToMany(() => MovieCategory, (moviecategory) => moviecategory.movies)
   categories: MovieCategory[];
+
+  @OneToMany(() => Review, (review) => review.movie)
+  reviews: Review[];
 }
