@@ -1,10 +1,12 @@
 import { Movie } from 'src/movies/entities/movie.entity';
+import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -34,4 +36,7 @@ export class Showtime {
 
   @ManyToOne(() => Movie, (movie) => movie.showtimes)
   movie: Movie;
+
+  @OneToMany(() => Ticket, (ticket) => ticket.showtimes)
+  tickets: Ticket[];
 }
