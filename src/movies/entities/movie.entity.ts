@@ -1,13 +1,17 @@
+import { MovieCategory } from 'src/movie_categories/entities/movie_category.entity';
+import { Showtime } from 'src/showtimes/entities/showtime.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('movies')
+@Entity()
 export class Movie {
   @PrimaryGeneratedColumn({ comment: 'รหัสหนัง' })
   movieId: number;
@@ -16,13 +20,13 @@ export class Movie {
   movieName: string;
 
   @Column({ comment: 'คำอธิบายหนัง' })
-  movieDiscription: string;
+  movieDesc: string;
 
   @Column({ comment: 'ความยาวหนัง หน่วย นาที' })
   movieLength: number;
 
   @Column({ comment: 'รูปภาพ' })
-  movieImg: string;
+  movieImage: string;
 
   @Column({ comment: 'ตัวอย่างหนัง' })
   movieTrailer: string;
@@ -35,4 +39,10 @@ export class Movie {
 
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
+
+  @OneToMany(() => Showtime, (showtime) => showtime.movie)
+  showtimes: Showtime[];
+
+  @ManyToMany(() => MovieCategory, (moviecategory) => moviecategory.movies)
+  categories: MovieCategory[];
 }
