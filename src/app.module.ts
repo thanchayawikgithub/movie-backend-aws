@@ -11,13 +11,15 @@ import { MovieCategoriesModule } from './movie_categories/movie_categories.modul
 import { MovieCategory } from './movie_categories/entities/movie_category.entity';
 import { ReviewsModule } from './reviews/reviews.module';
 import { Review } from './reviews/entities/review.entity';
+import { TicketsModule } from './tickets/tickets.module';
+import { Ticket } from './tickets/entities/ticket.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'movie.db',
-      entities: [Movie, Showtime, MovieCategory, Review],
+      entities: [Movie, Showtime, MovieCategory, Review, Ticket],
       synchronize: true,
     }),
     MoviesModule,
@@ -27,6 +29,8 @@ import { Review } from './reviews/entities/review.entity';
     MovieCategoriesModule,
 
     ReviewsModule,
+
+    TicketsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

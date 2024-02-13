@@ -1,29 +1,21 @@
-import { Movie } from 'src/movies/entities/movie.entity';
-import { Ticket } from 'src/tickets/entities/ticket.entity';
+import { Review } from 'src/reviews/entities/review.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Review {
+export class Ticket {
   @PrimaryGeneratedColumn()
-  reviewId: number;
+  ticketId: number;
 
   @Column()
-  reviewDate: Date;
-
-  @Column()
-  reviewRating: number;
-
-  @Column()
-  reviewComment: string;
+  ticketPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
@@ -34,9 +26,6 @@ export class Review {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => Movie, (movie) => movie.reviews)
-  movie: Movie[];
-
-  @OneToOne(() => Ticket, (ticket) => ticket.reviews)
-  tickets: Ticket[];
+  @OneToOne(() => Review, (review) => review.tickets)
+  reviews: Review[];
 }
