@@ -1,4 +1,5 @@
 import { Review } from 'src/reviews/entities/review.entity';
+import { Seat } from 'src/seats/entities/seat.entity';
 import { Showtime } from 'src/showtimes/entities/showtime.entity';
 import {
   Column,
@@ -35,4 +36,8 @@ export class Ticket {
 
   @ManyToOne(() => Showtime, (showtime) => showtime.tickets)
   showtimes: Showtime[];
+
+  @OneToOne(() => Seat, (seat) => seat.tickets)
+  @JoinColumn()
+  seat: Seat[];
 }
