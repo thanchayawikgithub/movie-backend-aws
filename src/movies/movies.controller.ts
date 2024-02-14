@@ -39,4 +39,9 @@ export class MoviesController {
   remove(@Param('id') id: string) {
     return this.moviesService.remove(+id);
   }
+
+  @Get(':showId/showtime')
+  findShowTime(@Param('showId') showId: number) {
+    return this.moviesService.findShowtime(showId);
+  }
 }
