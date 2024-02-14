@@ -1,5 +1,6 @@
 import { Card } from 'src/cards/entities/card.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
+import { ReceiptFood } from 'src/receipt_foods/entities/receipt_food.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
   Column,
@@ -46,4 +47,7 @@ export class Receipt {
 
   @ManyToOne(() => Card, (cards) => cards.receipts)
   cards: Card[];
+
+  @OneToMany(() => ReceiptFood, (recfoods) => recfoods.receipts)
+  recfoods: ReceiptFood[];
 }

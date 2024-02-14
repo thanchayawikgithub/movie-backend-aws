@@ -31,6 +31,8 @@ import { FoodsModule } from './foods/foods.module';
 import { Food } from './foods/entities/food.entity';
 import { FoodCategoriesModule } from './food_categories/food_categories.module';
 import { FoodCategory } from './food_categories/entities/food_category.entity';
+import { ReceiptFoodsModule } from './receipt_foods/receipt_foods.module';
+import { ReceiptFood } from './receipt_foods/entities/receipt_food.entity';
 
 @Module({
   imports: [
@@ -52,6 +54,7 @@ import { FoodCategory } from './food_categories/entities/food_category.entity';
         Receipt,
         Food,
         FoodCategory,
+        ReceiptFood,
       ],
       synchronize: true,
     }),
@@ -82,6 +85,8 @@ import { FoodCategory } from './food_categories/entities/food_category.entity';
     FoodsModule,
 
     FoodCategoriesModule,
+
+    ReceiptFoodsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

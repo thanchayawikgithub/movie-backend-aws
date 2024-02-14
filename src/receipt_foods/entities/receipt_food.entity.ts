@@ -1,29 +1,25 @@
-import { FoodCategory } from 'src/food_categories/entities/food_category.entity';
-import { ReceiptFood } from 'src/receipt_foods/entities/receipt_food.entity';
+import { Food } from 'src/foods/entities/food.entity';
+import { Receipt } from 'src/receipts/entities/receipt.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Food {
+export class ReceiptFood {
   @PrimaryGeneratedColumn()
-  foodId: number;
+  recfoodId: number;
 
   @Column()
-  foodName: string;
+  recfoodQty: number;
 
   @Column()
-  foodImage: string;
-
-  @Column()
-  foodPrice: number;
+  recfoodPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
@@ -34,9 +30,9 @@ export class Food {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => FoodCategory, (foodcats) => foodcats.foods)
-  foodcats: FoodCategory[];
+  @ManyToOne(() => Food, (foods) => foods.recfoods)
+  foods: Food[];
 
-  @OneToMany(() => ReceiptFood, (recfoods) => recfoods.foods)
-  recfoods: ReceiptFood[];
+  @ManyToOne(() => Receipt, (receipts) => receipts.recfoods)
+  receipts: Receipt[];
 }
