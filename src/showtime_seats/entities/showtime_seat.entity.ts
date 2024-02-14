@@ -1,24 +1,32 @@
 import { Seat } from 'src/seats/entities/seat.entity';
 import { Showtime } from 'src/showtimes/entities/showtime.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class ShowtimeSeat {
-  @PrimaryGeneratedColumn()
-  ShoseatId: number;
+  @PrimaryGeneratedColumn({ comment: 'รหัสที่นั่งในรอบฉาย' })
+  showSeatId: number;
 
   @Column()
-  ShoseatSowtimeId: number;
+  showSeatSowtimeId: number;
 
   @Column()
-  ShoseatSeatId: number;
+  showSeatSeatId: number;
 
   @Column()
-  ShoseatStatus: string;
+  showSeatStatus: string;
 
-  @ManyToOne(() => Showtime, (showtimes) => showtimes.showtimeseats)
-  showtimes: Showtime;
+  @ManyToOne(() => Showtime, (showtime) => showtime.showtimeseats)
+  @JoinColumn({ name: 'showId' })
+  showtime: Showtime;
 
   @ManyToOne(() => Seat, (seats) => seats.showtimeseats)
-  seats: Seat;
+  @JoinColumn({ name: 'seatId' })
+  seat: Seat;
 }

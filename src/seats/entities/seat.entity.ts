@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -15,16 +16,16 @@ import {
 
 @Entity()
 export class Seat {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสที่นั่ง' })
   seatId: number;
 
-  @Column()
+  @Column({ comment: 'หมายเลขที่นั่ง' })
   seatNumber: string; //หมายเลขที่นั่ง
 
-  @Column()
+  @Column({ comment: 'ประเภทที่นั่ง' })
   seatType: string;
 
-  @Column()
+  @Column({ comment: 'ราคาที่นั่ง' })
   seatPrice: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -37,11 +38,13 @@ export class Seat {
   updateDate: Date;
 
   @OneToOne(() => Ticket, (tickets) => tickets.seat)
-  tickets: Ticket[];
+  @JoinColumn({ name: 'ticketId' })
+  ticket: Ticket;
 
-  @ManyToOne(() => Theater, (theaters) => theaters.seat)
-  theaters: Theater[];
+  @ManyToOne(() => Theater, (theater) => theater.seats)
+  @JoinColumn({ name: 'theaterId' })
+  theater: Theater;
 
-  @OneToMany(() => ShowtimeSeat, (showtimeseats) => showtimeseats.seats)
+  @OneToMany(() => ShowtimeSeat, (showtimeseat) => showtimeseat.seat)
   showtimeseats: ShowtimeSeat[];
 }

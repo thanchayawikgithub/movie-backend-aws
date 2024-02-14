@@ -8,6 +8,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -16,16 +17,16 @@ import {
 
 @Entity()
 export class Customer {
-  @PrimaryGeneratedColumn()
-  CusId: number;
+  @PrimaryGeneratedColumn({ comment: 'รหัสลูกค้า' })
+  cusId: number;
 
-  @Column()
-  CusFirstname: string;
+  @Column({ comment: 'ชื่อลูกค้า' })
+  cusFirstname: string;
 
-  @Column()
+  @Column({ comment: 'นามสกุลลูกค้า' })
   cusLastname: string;
 
-  @Column()
+  @Column({ comment: 'อีเมลลูกค้า' })
   cusEmail: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -37,18 +38,19 @@ export class Customer {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @OneToMany(() => Review, (reviews) => reviews.customers)
+  @OneToMany(() => Review, (review) => review.customer)
   reviews: Review[];
 
-  @OneToMany(() => Entrylog, (entrylogs) => entrylogs.customers)
+  @OneToMany(() => Entrylog, (entrylog) => entrylog.customer)
   entrylogs: Entrylog[];
 
-  @OneToMany(() => Card, (cards) => cards.customers)
+  @OneToMany(() => Card, (card) => card.customer)
   cards: Card[];
 
-  @OneToMany(() => Receipt, (receipts) => receipts.customers)
+  @OneToMany(() => Receipt, (receipt) => receipt.customer)
   receipts: Receipt[];
 
-  @OneToOne(() => Ticket, (tickets) => tickets.customers)
-  tickets: Ticket[];
+  @OneToOne(() => Ticket, (ticket) => ticket.customer)
+  @JoinColumn({ name: 'ticketId' })
+  ticket: Ticket;
 }

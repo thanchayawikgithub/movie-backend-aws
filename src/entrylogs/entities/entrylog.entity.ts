@@ -27,9 +27,9 @@ export class Entrylog {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => Customer, (customers) => customers.entrylogs)
-  customers: Customer[];
+  @ManyToOne(() => Customer, (customer) => customer.entrylogs)
+  customer: Customer;
 
-  @ManyToOne(() => Ticket, (tickets) => tickets.entrylogs)
-  tickets: Ticket[];
+  @ManyToOne(() => Ticket, (ticket) => ticket.entrylogs)
+  ticket: Ticket;
 }

@@ -7,6 +7,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -15,19 +16,19 @@ import {
 
 @Entity()
 export class Receipt {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสใบเสร็จ' })
   receiptId: number;
 
-  @Column()
+  @Column({ comment: 'วันที่ใบเสร็จ' })
   recDate: Date;
 
-  @Column()
+  @Column({ comment: 'ราคารวม' })
   recTotalPrice: number;
 
-  @Column()
+  @Column({ comment: 'วิธีการชำระเงิน' })
   recPaymentMed: string;
 
-  @Column()
+  @Column({ comment: 'สถานะการจ่ายเงิน' })
   recPaymentStatus: boolean;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -39,15 +40,17 @@ export class Receipt {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => Customer, (customers) => customers.receipts)
-  customers: Customer[];
+  @ManyToOne(() => Customer, (customer) => customer.receipts)
+  @JoinColumn({ name: 'cusId' })
+  customer: Customer;
 
-  @OneToMany(() => Ticket, (tickets) => tickets.receipts)
+  @OneToMany(() => Ticket, (ticket) => ticket.receipts)
   tickets: Ticket[];
 
-  @ManyToOne(() => Card, (cards) => cards.receipts)
-  cards: Card[];
+  @ManyToOne(() => Card, (card) => card.receipts)
+  @JoinColumn({ name: 'cardId' })
+  card: Card;
 
-  @OneToMany(() => ReceiptFood, (recfoods) => recfoods.receipts)
+  @OneToMany(() => ReceiptFood, (recfood) => recfood.receipt)
   recfoods: ReceiptFood[];
 }

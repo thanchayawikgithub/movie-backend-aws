@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,16 +14,16 @@ import {
 
 @Entity()
 export class Food {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสอาหาร' })
   foodId: number;
 
-  @Column()
+  @Column({ comment: 'ชื่ออาหาร' })
   foodName: string;
 
-  @Column()
+  @Column({ comment: 'รูปอาหาร' })
   foodImage: string;
 
-  @Column()
+  @Column({ comment: 'ราคาอาหาร' })
   foodPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -34,9 +35,10 @@ export class Food {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => FoodCategory, (foodcats) => foodcats.foods)
-  foodcats: FoodCategory[];
+  @ManyToOne(() => FoodCategory, (foodcat) => foodcat.foods)
+  @JoinColumn({ name: 'foodcatId' })
+  foodcat: FoodCategory;
 
-  @OneToMany(() => ReceiptFood, (recfoods) => recfoods.foods)
+  @OneToMany(() => ReceiptFood, (recfood) => recfood.food)
   recfoods: ReceiptFood[];
 }

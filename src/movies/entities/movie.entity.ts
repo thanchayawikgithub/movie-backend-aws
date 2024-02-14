@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -45,6 +46,7 @@ export class Movie {
   showtimes: Showtime[];
 
   @ManyToMany(() => MovieCategory, (moviecategory) => moviecategory.movies)
+  @JoinColumn({ name: 'moviecatId' })
   categories: MovieCategory[];
 
   @OneToMany(() => Review, (review) => review.movie)

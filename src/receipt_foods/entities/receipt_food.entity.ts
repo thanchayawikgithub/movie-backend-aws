@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,13 +13,13 @@ import {
 
 @Entity()
 export class ReceiptFood {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสใบเสร็จอาหาร' })
   recfoodId: number;
 
-  @Column()
+  @Column({ comment: 'จำนวนอาหาในใบเสร็จ' })
   recfoodQty: number;
 
-  @Column()
+  @Column({ comment: 'ราคาอาหารในใบเสร็จ' })
   recfoodPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -30,9 +31,11 @@ export class ReceiptFood {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => Food, (foods) => foods.recfoods)
-  foods: Food[];
+  @ManyToOne(() => Food, (food) => food.recfoods)
+  @JoinColumn({ name: 'foodId' })
+  food: Food;
 
-  @ManyToOne(() => Receipt, (receipts) => receipts.recfoods)
-  receipts: Receipt[];
+  @ManyToOne(() => Receipt, (receipt) => receipt.recfoods)
+  @JoinColumn({ name: 'receiptId' })
+  receipt: Receipt;
 }

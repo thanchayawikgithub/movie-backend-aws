@@ -19,10 +19,10 @@ import {
 
 @Entity()
 export class Ticket {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสตั๋ว' })
   ticketId: number;
 
-  @Column()
+  @Column({ comment: 'ราคาตั๋ว' })
   ticketPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -34,23 +34,26 @@ export class Ticket {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @OneToOne(() => Review, (review) => review.tickets)
-  @JoinColumn()
-  reviews: Review[];
+  @OneToOne(() => Review, (review) => review.ticket)
+  @JoinColumn({ name: 'reviewId' })
+  review: Review;
 
   @ManyToOne(() => Showtime, (showtime) => showtime.tickets)
-  showtimes: Showtime[];
+  @JoinColumn({ name: 'showId' })
+  showtime: Showtime;
 
-  @OneToOne(() => Seat, (seat) => seat.tickets)
-  @JoinColumn()
-  seat: Seat[];
+  @OneToOne(() => Seat, (seat) => seat.ticket)
+  @JoinColumn({ name: 'seatId' })
+  seat: Seat;
 
-  @OneToMany(() => Entrylog, (entrylogs) => entrylogs.tickets)
+  @OneToMany(() => Entrylog, (entrylog) => entrylog.ticket)
   entrylogs: Entrylog[];
 
-  @OneToOne(() => Customer, (customers) => customers.tickets)
-  customers: Customer[];
+  @OneToOne(() => Customer, (customer) => customer.ticket)
+  @JoinColumn({ name: 'cusId' })
+  customer: Customer;
 
-  @ManyToOne(() => Receipt, (receipts) => receipts.tickets)
+  @ManyToOne(() => Receipt, (receipt) => receipt.tickets)
+  @JoinColumn({ name: 'receiptId' })
   receipts: Receipt;
 }

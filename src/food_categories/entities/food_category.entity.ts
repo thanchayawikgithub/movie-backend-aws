@@ -11,11 +11,11 @@ import {
 
 @Entity()
 export class FoodCategory {
-  @PrimaryGeneratedColumn()
-  foodcatId: number;
+  @PrimaryGeneratedColumn({ comment: 'รหัสหมวดหมู่อาหาร' })
+  foodCatId: number;
 
-  @Column()
-  foodcatName: string;
+  @Column({ comment: 'ชื่อหมวดหมู่อาหาร' })
+  foodCatName: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
@@ -26,6 +26,6 @@ export class FoodCategory {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @OneToMany(() => Food, (foods) => foods.foodcats)
+  @OneToMany(() => Food, (food) => food.foodcat)
   foods: Food[];
 }

@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -14,16 +15,16 @@ import {
 
 @Entity()
 export class Review {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสรีวิว' })
   reviewId: number;
 
-  @Column()
+  @Column({ comment: 'วันที่รีวิว' })
   reviewDate: Date;
 
-  @Column()
+  @Column({ comment: 'เรทติ้งรีวิว' })
   reviewRating: number;
 
-  @Column()
+  @Column({ comment: 'ความคิดเห็นรีวิว' })
   reviewComment: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -36,11 +37,14 @@ export class Review {
   updateDate: Date;
 
   @ManyToOne(() => Movie, (movie) => movie.reviews)
-  movie: Movie[];
+  @JoinColumn({ name: 'movieId' })
+  movie: Movie;
 
-  @OneToOne(() => Ticket, (ticket) => ticket.reviews)
-  tickets: Ticket[];
+  @OneToOne(() => Ticket, (ticket) => ticket.review)
+  @JoinColumn({ name: 'ticketId' })
+  ticket: Ticket;
 
-  @ManyToOne(() => Customer, (customers) => customers.reviews)
-  customers: Customer[];
+  @ManyToOne(() => Customer, (customer) => customer.reviews)
+  @JoinColumn({ name: 'cusId' })
+  customer: Customer;
 }

@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,10 +13,10 @@ import {
 
 @Entity()
 export class Theater {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสโรงหนัง' })
   theaterId: number;
 
-  @Column()
+  @Column({ comment: 'ชื่อโรงหนัง' })
   theaterName: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -27,9 +28,9 @@ export class Theater {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @OneToMany(() => Showtime, (showtime) => showtime.theaters)
-  showtime: Showtime[];
+  @OneToMany(() => Showtime, (showtime) => showtime.theater)
+  showtimes: Showtime[];
 
-  @OneToMany(() => Seat, (seat) => seat.theaters)
-  seat: Seat[];
+  @OneToMany(() => Seat, (seat) => seat.theater)
+  seats: Seat[];
 }

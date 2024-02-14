@@ -7,6 +7,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -15,16 +16,16 @@ import {
 
 @Entity()
 export class Showtime {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสรอบฉาย' })
   showId: number;
 
-  @Column()
+  @Column({ comment: 'เวลาเริ่มรอบฉาย' })
   showStart: Date;
 
-  @Column()
+  @Column({ comment: 'วันที่รอบฉาย' })
   showDate: Date;
 
-  @Column()
+  @Column({ comment: 'เวลาที่หยุดฉาย' })
   showEnd: Date;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -37,14 +38,16 @@ export class Showtime {
   updateDate: Date;
 
   @ManyToOne(() => Movie, (movie) => movie.showtimes)
+  @JoinColumn({ name: 'movieId' })
   movie: Movie;
 
-  @OneToMany(() => Ticket, (ticket) => ticket.showtimes)
+  @OneToMany(() => Ticket, (ticket) => ticket.showtime)
   tickets: Ticket[];
 
-  @ManyToOne(() => Theater, (theaters) => theaters.showtime)
-  theaters: Theater;
+  @ManyToOne(() => Theater, (theater) => theater.showtimes)
+  @JoinColumn({ name: 'theaterId' })
+  theater: Theater;
 
-  @OneToMany(() => ShowtimeSeat, (showtimeseats) => showtimeseats.showtimes)
+  @OneToMany(() => ShowtimeSeat, (showtimeseats) => showtimeseats.showtime)
   showtimeseats: ShowtimeSeat[];
 }

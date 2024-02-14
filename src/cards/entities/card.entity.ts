@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,19 +14,19 @@ import {
 
 @Entity()
 export class Card {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสบัตร' })
   cardId: number;
 
-  @Column()
+  @Column({ comment: 'ชื่อผู้ถือบัตร' })
   cardHolderName: string;
 
-  @Column()
+  @Column({ comment: 'เลขบัตร' })
   cardNumber: string;
 
-  @Column()
+  @Column({ comment: 'วันหมดอายุบัตร' })
   cardExpiredDate: string;
 
-  @Column()
+  @Column({ comment: 'รหัสความปลอดภัยบัตร' })
   cardCvv: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -37,9 +38,10 @@ export class Card {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => Customer, (customers) => customers.cards)
-  customers: Customer[];
+  @ManyToOne(() => Customer, (customer) => customer.cards)
+  @JoinColumn({ name: 'cusId' })
+  customer: Customer;
 
-  @OneToMany(() => Receipt, (receipts) => receipts.cards)
+  @OneToMany(() => Receipt, (receipts) => receipts.card)
   receipts: Receipt[];
 }

@@ -12,10 +12,10 @@ import {
 
 @Entity()
 export class MovieCategory {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ comment: 'รหัสหมวดหมู่หนัง' })
   movieCatId: number;
 
-  @Column()
+  @Column({ comment: 'ชื่อหมวดหมู่หนัง' })
   movieCatName: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
@@ -28,6 +28,6 @@ export class MovieCategory {
   updateDate: Date;
 
   @ManyToMany(() => Movie, (movie) => movie.categories)
-  @JoinTable()
+  @JoinTable({ name: 'movieId' })
   movies: Movie[];
 }
