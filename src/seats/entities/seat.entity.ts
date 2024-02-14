@@ -1,3 +1,4 @@
+import { ShowtimeSeat } from 'src/showtime_seats/entities/showtime_seat.entity';
 import { Theater } from 'src/theaters/entities/theater.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
@@ -6,6 +7,7 @@ import {
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -39,4 +41,7 @@ export class Seat {
 
   @ManyToOne(() => Theater, (theaters) => theaters.seat)
   theaters: Theater[];
+
+  @OneToMany(() => ShowtimeSeat, (showtimeseats) => showtimeseats.seats)
+  showtimeseats: ShowtimeSeat[];
 }

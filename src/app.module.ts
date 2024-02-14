@@ -17,13 +17,36 @@ import { SeatsModule } from './seats/seats.module';
 import { Seat } from './seats/entities/seat.entity';
 import { TheatersModule } from './theaters/theaters.module';
 import { Theater } from './theaters/entities/theater.entity';
+import { ShowtimeSeatsModule } from './showtime_seats/showtime_seats.module';
+import { ShowtimeSeat } from './showtime_seats/entities/showtime_seat.entity';
+import { CustomersModule } from './customers/customers.module';
+import { Customer } from './customers/entities/customer.entity';
+import { EntrylogsModule } from './entrylogs/entrylogs.module';
+import { Entrylog } from './entrylogs/entities/entrylog.entity';
+import { CardsModule } from './cards/cards.module';
+import { Card } from './cards/entities/card.entity';
+import { ReceiptsModule } from './receipts/receipts.module';
+import { Receipt } from './receipts/entities/receipt.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'movie.db',
-      entities: [Movie, Showtime, MovieCategory, Review, Ticket, Seat, Theater],
+      entities: [
+        Movie,
+        Showtime,
+        MovieCategory,
+        Review,
+        Ticket,
+        Seat,
+        Theater,
+        ShowtimeSeat,
+        Customer,
+        Entrylog,
+        Card,
+        Receipt,
+      ],
       synchronize: true,
     }),
     MoviesModule,
@@ -39,6 +62,16 @@ import { Theater } from './theaters/entities/theater.entity';
     SeatsModule,
 
     TheatersModule,
+
+    ShowtimeSeatsModule,
+
+    CustomersModule,
+
+    EntrylogsModule,
+
+    CardsModule,
+
+    ReceiptsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

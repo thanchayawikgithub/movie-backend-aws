@@ -1,4 +1,5 @@
 import { Movie } from 'src/movies/entities/movie.entity';
+import { ShowtimeSeat } from 'src/showtime_seats/entities/showtime_seat.entity';
 import { Theater } from 'src/theaters/entities/theater.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
@@ -43,4 +44,7 @@ export class Showtime {
 
   @ManyToOne(() => Theater, (theaters) => theaters.showtime)
   theaters: Theater;
+
+  @OneToMany(() => ShowtimeSeat, (showtimeseats) => showtimeseats.showtimes)
+  showtimeseats: ShowtimeSeat[];
 }
