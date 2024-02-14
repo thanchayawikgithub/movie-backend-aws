@@ -27,6 +27,10 @@ import { CardsModule } from './cards/cards.module';
 import { Card } from './cards/entities/card.entity';
 import { ReceiptsModule } from './receipts/receipts.module';
 import { Receipt } from './receipts/entities/receipt.entity';
+import { FoodsModule } from './foods/foods.module';
+import { Food } from './foods/entities/food.entity';
+import { FoodCategoriesModule } from './food_categories/food_categories.module';
+import { FoodCategory } from './food_categories/entities/food_category.entity';
 
 @Module({
   imports: [
@@ -46,6 +50,8 @@ import { Receipt } from './receipts/entities/receipt.entity';
         Entrylog,
         Card,
         Receipt,
+        Food,
+        FoodCategory,
       ],
       synchronize: true,
     }),
@@ -72,6 +78,10 @@ import { Receipt } from './receipts/entities/receipt.entity';
     CardsModule,
 
     ReceiptsModule,
+
+    FoodsModule,
+
+    FoodCategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

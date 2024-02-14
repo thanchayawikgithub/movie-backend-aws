@@ -1,5 +1,16 @@
+import { Card } from 'src/cards/entities/card.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Ticket } from 'src/tickets/entities/ticket.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Receipt {
@@ -18,6 +29,21 @@ export class Receipt {
   @Column()
   recPaymentStatus: boolean;
 
+  @CreateDateColumn({ comment: 'วันที่สร้าง' })
+  creatDate: Date;
+
+  @DeleteDateColumn({ comment: 'วันที่ลบ' })
+  deleteDate: Date;
+
+  @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
+  updateDate: Date;
+
   @ManyToOne(() => Customer, (customers) => customers.receipts)
   customers: Customer[];
+
+  @OneToMany(() => Ticket, (tickets) => tickets.receipts)
+  tickets: Ticket[];
+
+  @ManyToOne(() => Card, (cards) => cards.receipts)
+  cards: Card[];
 }

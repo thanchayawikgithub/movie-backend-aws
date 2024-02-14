@@ -2,12 +2,14 @@ import { Card } from 'src/cards/entities/card.entity';
 import { Entrylog } from 'src/entrylogs/entities/entrylog.entity';
 import { Receipt } from 'src/receipts/entities/receipt.entity';
 import { Review } from 'src/reviews/entities/review.entity';
+import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -46,4 +48,7 @@ export class Customer {
 
   @OneToMany(() => Receipt, (receipts) => receipts.customers)
   receipts: Receipt[];
+
+  @OneToOne(() => Ticket, (tickets) => tickets.customers)
+  tickets: Ticket[];
 }

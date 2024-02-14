@@ -1,32 +1,27 @@
-import { Customer } from 'src/customers/entities/customer.entity';
-import { Receipt } from 'src/receipts/entities/receipt.entity';
+import { FoodCategory } from 'src/food_categories/entities/food_category.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Card {
+export class Food {
   @PrimaryGeneratedColumn()
-  cardId: number;
+  foodId: number;
 
   @Column()
-  cardHolderName: string;
+  foodName: string;
 
   @Column()
-  cardNumber: string;
+  foodImage: string;
 
   @Column()
-  cardExpiredDate: string;
-
-  @Column()
-  cardCvv: string;
+  foodPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
@@ -37,9 +32,6 @@ export class Card {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @ManyToOne(() => Customer, (customers) => customers.cards)
-  customers: Customer[];
-
-  @OneToMany(() => Receipt, (receipts) => receipts.cards)
-  receipts: Receipt[];
+  @ManyToOne(() => FoodCategory, (foodcats) => foodcats.foods)
+  foodcats: FoodCategory[];
 }
