@@ -1,9 +1,11 @@
+import { Theater } from 'src/theaters/entities/theater.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -34,4 +36,7 @@ export class Seat {
 
   @OneToOne(() => Ticket, (tickets) => tickets.seat)
   tickets: Ticket[];
+
+  @ManyToOne(() => Theater, (theaters) => theaters.seat)
+  theaters: Theater[];
 }

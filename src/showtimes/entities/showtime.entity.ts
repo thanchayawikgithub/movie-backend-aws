@@ -1,4 +1,5 @@
 import { Movie } from 'src/movies/entities/movie.entity';
+import { Theater } from 'src/theaters/entities/theater.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
 import {
   Column,
@@ -39,4 +40,7 @@ export class Showtime {
 
   @OneToMany(() => Ticket, (ticket) => ticket.showtimes)
   tickets: Ticket[];
+
+  @ManyToOne(() => Theater, (theaters) => theaters.showtime)
+  theaters: Theater;
 }
