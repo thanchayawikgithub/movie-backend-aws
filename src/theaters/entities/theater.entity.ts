@@ -1,11 +1,11 @@
 import { Seat } from 'src/seats/entities/seat.entity';
+import { ShowtimeSeat } from 'src/showtime_seats/entities/showtime_seat.entity';
 import { Showtime } from 'src/showtimes/entities/showtime.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -33,4 +33,7 @@ export class Theater {
 
   @OneToMany(() => Seat, (seat) => seat.theater)
   seats: Seat[];
+
+  @OneToMany(() => ShowtimeSeat, (showtimeseats) => showtimeseats.theater)
+  showtimeseats: ShowtimeSeat[];
 }

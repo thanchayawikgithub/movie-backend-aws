@@ -1,5 +1,6 @@
 import { Seat } from 'src/seats/entities/seat.entity';
 import { Showtime } from 'src/showtimes/entities/showtime.entity';
+import { Theater } from 'src/theaters/entities/theater.entity';
 import {
   Column,
   Entity,
@@ -14,7 +15,7 @@ export class ShowtimeSeat {
   showSeatId: number;
 
   @Column({
-    default: false,
+    default: true,
   })
   showSeatStatus: boolean;
 
@@ -25,4 +26,8 @@ export class ShowtimeSeat {
   @ManyToOne(() => Seat, (seats) => seats.showtimeseats)
   @JoinColumn({ name: 'seatId' })
   seat: Seat;
+
+  @ManyToOne(() => Theater, (theater) => theater.showtimeseats)
+  @JoinColumn({ name: 'theaterId' })
+  theater: Theater;
 }
