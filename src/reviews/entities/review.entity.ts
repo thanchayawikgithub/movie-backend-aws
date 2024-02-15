@@ -18,9 +18,6 @@ export class Review {
   @PrimaryGeneratedColumn({ comment: 'รหัสรีวิว' })
   reviewId: number;
 
-  @Column({ comment: 'วันที่รีวิว' })
-  reviewDate: Date;
-
   @Column({ comment: 'เรทติ้งรีวิว' })
   reviewRating: number;
 

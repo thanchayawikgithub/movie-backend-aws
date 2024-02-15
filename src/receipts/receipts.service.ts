@@ -39,7 +39,7 @@ export class ReceiptsService {
     if (!customer) {
       throw new NotFoundException('customer not found');
     }
-    if (receipt.recPaymentMed === 'credit') {
+    if (receipt.recPaymentMed === 'credit card') {
       const card = await this.cardRepository.findOne({
         where: { cardId: cardId },
       });
@@ -78,14 +78,14 @@ export class ReceiptsService {
       for (const recFoodDto of createReceiptDto.receiptFoods) {
         const { foodId } = recFoodDto;
         const receiptFood = new ReceiptFood();
-        const food = this.foodRepository.findOne({
+        const food = await this.foodRepository.findOne({
           where: { foodId: foodId },
         });
         if (!food) {
           throw new NotFoundException('food not found');
         }
-        receiptFood.food = receiptFood.food;
-        receiptFood.recFoodPrice = (await food).foodPrice;
+        receiptFood.food = food;
+        receiptFood.recFoodPrice = recFoodDto.recFoodPrice;
         receiptFood.recFoodQty = recFoodDto.recFoodQty;
         receiptFood.receipt = savedReceipt;
         const savedReceiptFood =
