@@ -26,7 +26,7 @@ export class Seat {
   seatType: string;
 
   @Column({ comment: 'ราคาที่นั่ง' })
-  seatPrice: string;
+  seatPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;

@@ -14,13 +14,13 @@ import {
 @Entity()
 export class ReceiptFood {
   @PrimaryGeneratedColumn({ comment: 'รหัสใบเสร็จอาหาร' })
-  recfoodId: number;
+  recFoodId: number;
 
   @Column({ comment: 'จำนวนอาหาในใบเสร็จ' })
-  recfoodQty: number;
+  recFoodQty: number;
 
   @Column({ comment: 'ราคาอาหารในใบเสร็จ' })
-  recfoodPrice: number;
+  recFoodPrice: number;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;

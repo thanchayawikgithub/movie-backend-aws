@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MoviesModule } from './movies/movies.module';
 import { Movie } from './movies/entities/movie.entity';
-
 import { ShowtimesModule } from './showtimes/showtimes.module';
 import { Showtime } from './showtimes/entities/showtime.entity';
 import { MovieCategoriesModule } from './movie_categories/movie_categories.module';
@@ -21,8 +20,6 @@ import { ShowtimeSeatsModule } from './showtime_seats/showtime_seats.module';
 import { ShowtimeSeat } from './showtime_seats/entities/showtime_seat.entity';
 import { CustomersModule } from './customers/customers.module';
 import { Customer } from './customers/entities/customer.entity';
-import { EntrylogsModule } from './entrylogs/entrylogs.module';
-import { Entrylog } from './entrylogs/entities/entrylog.entity';
 import { CardsModule } from './cards/cards.module';
 import { Card } from './cards/entities/card.entity';
 import { ReceiptsModule } from './receipts/receipts.module';
@@ -49,7 +46,6 @@ import { ReceiptFood } from './receipt_foods/entities/receipt_food.entity';
         Theater,
         ShowtimeSeat,
         Customer,
-        Entrylog,
         Card,
         Receipt,
         Food,
@@ -75,8 +71,6 @@ import { ReceiptFood } from './receipt_foods/entities/receipt_food.entity';
     ShowtimeSeatsModule,
 
     CustomersModule,
-
-    EntrylogsModule,
 
     CardsModule,
 

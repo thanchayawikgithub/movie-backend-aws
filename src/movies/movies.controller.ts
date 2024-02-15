@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { Response } from 'express';
 
 @Controller('movies')
 export class MoviesController {
@@ -43,5 +45,13 @@ export class MoviesController {
   @Get(':showId/showtime')
   findShowTime(@Param('showId') showId: number) {
     return this.moviesService.findShowtime(showId);
+  }
+
+  @Get('image/:imageFile')
+  async getImageByFileNmae(
+    @Param('imageFile') imageFile: string,
+    @Res() res: Response,
+  ) {
+    res.sendFile(imageFile, { root: './uploadfile' });
   }
 }

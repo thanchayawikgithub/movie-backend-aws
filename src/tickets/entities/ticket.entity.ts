@@ -1,5 +1,4 @@
 import { Customer } from 'src/customers/entities/customer.entity';
-import { Entrylog } from 'src/entrylogs/entities/entrylog.entity';
 import { Receipt } from 'src/receipts/entities/receipt.entity';
 import { Review } from 'src/reviews/entities/review.entity';
 import { Seat } from 'src/seats/entities/seat.entity';
@@ -46,14 +45,11 @@ export class Ticket {
   @JoinColumn({ name: 'seatId' })
   seat: Seat;
 
-  @OneToMany(() => Entrylog, (entrylog) => entrylog.ticket)
-  entrylogs: Entrylog[];
-
   @OneToOne(() => Customer, (customer) => customer.ticket)
   @JoinColumn({ name: 'cusId' })
   customer: Customer;
 
   @ManyToOne(() => Receipt, (receipt) => receipt.tickets)
   @JoinColumn({ name: 'receiptId' })
-  receipts: Receipt;
+  receipt: Receipt;
 }

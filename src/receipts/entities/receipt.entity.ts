@@ -19,9 +19,6 @@ export class Receipt {
   @PrimaryGeneratedColumn({ comment: 'รหัสใบเสร็จ' })
   receiptId: number;
 
-  @Column({ comment: 'วันที่ใบเสร็จ' })
-  recDate: Date;
-
   @Column({ comment: 'ราคารวม' })
   recTotalPrice: number;
 
@@ -44,7 +41,7 @@ export class Receipt {
   @JoinColumn({ name: 'cusId' })
   customer: Customer;
 
-  @OneToMany(() => Ticket, (ticket) => ticket.receipts)
+  @OneToMany(() => Ticket, (ticket) => ticket.receipt)
   tickets: Ticket[];
 
   @ManyToOne(() => Card, (card) => card.receipts)

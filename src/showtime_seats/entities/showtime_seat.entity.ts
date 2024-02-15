@@ -13,14 +13,10 @@ export class ShowtimeSeat {
   @PrimaryGeneratedColumn({ comment: 'รหัสที่นั่งในรอบฉาย' })
   showSeatId: number;
 
-  @Column()
-  showSeatSowtimeId: number;
-
-  @Column()
-  showSeatSeatId: number;
-
-  @Column()
-  showSeatStatus: string;
+  @Column({
+    default: false,
+  })
+  showSeatStatus: boolean;
 
   @ManyToOne(() => Showtime, (showtime) => showtime.showtimeseats)
   @JoinColumn({ name: 'showId' })
