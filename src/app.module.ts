@@ -30,6 +30,7 @@ import { FoodCategoriesModule } from './food_categories/food_categories.module';
 import { FoodCategory } from './food_categories/entities/food_category.entity';
 import { ReceiptFoodsModule } from './receipt_foods/receipt_foods.module';
 import { ReceiptFood } from './receipt_foods/entities/receipt_food.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -81,6 +82,8 @@ import { ReceiptFood } from './receipt_foods/entities/receipt_food.entity';
     FoodCategoriesModule,
 
     ReceiptFoodsModule,
+
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

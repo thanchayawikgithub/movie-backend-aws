@@ -28,6 +28,9 @@ export class Customer {
   @Column({ comment: 'อีเมลลูกค้า' })
   cusEmail: string;
 
+  @Column({ comment: 'รหัสผ่าน' })
+  cusPassword: string;
+
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
 

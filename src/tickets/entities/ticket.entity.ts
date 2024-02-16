@@ -24,6 +24,12 @@ export class Ticket {
   @Column({ comment: 'ราคาตั๋ว' })
   ticketPrice: number;
 
+  @Column({ comment: 'รีวิว url' })
+  ticketReviewUrl: string;
+
+  @Column({ comment: 'หมายเลขตั๋ว' })
+  ticketNumber: string;
+
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
 

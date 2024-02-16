@@ -49,15 +49,15 @@ export class ReceiptsService {
       receipt.card = card;
     }
 
-    receipt.recTotalPrice = receipt.recTotalPrice;
-    receipt.recPaymentMed = receipt.recPaymentMed;
+    receipt.recTotalPrice = createReceiptDto.recTotalPrice;
+    receipt.recPaymentMed = createReceiptDto.recPaymentMed;
     receipt.customer = customer;
     const savedReceipt = await this.recieptRepository.save(receipt);
 
     for (const ticketDto of createReceiptDto.tickets) {
       const { showId, seatId } = ticketDto;
       const ticket = new Ticket();
-      const show = this.showtimeRepository.findOne({
+      const show = await this.showtimeRepository.findOne({
         where: { showId: showId },
       });
       if (!show) {
@@ -66,9 +66,9 @@ export class ReceiptsService {
       const seat = await this.seatRepository.findOne({
         where: { seatId: seatId },
       });
-      ticket.customer = savedReceipt.customer;
-      ticket.showtime = ticket.showtime;
-      ticket.seat = ticket.seat;
+      ticket.customer = customer;
+      ticket.showtime = show;
+      ticket.seat = seat;
       ticket.ticketPrice = seat.seatPrice;
       ticket.receipt = savedReceipt;
       const savedTicket = await this.ticketRepository.save(ticket);

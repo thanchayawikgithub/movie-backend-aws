@@ -38,8 +38,8 @@ export class ReviewsService {
       review.customer = customer;
     }
 
-    review.reviewRating = review.reviewRating;
-    review.reviewComment = review.reviewComment;
+    review.reviewRating = createReviewDto.reviewRating;
+    review.reviewComment = createReviewDto.reviewComment;
     review.ticket = ticket;
     const saveReview = await this.reviewRepository.save(review);
   }
