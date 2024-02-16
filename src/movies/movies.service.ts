@@ -48,7 +48,6 @@ export class MoviesService {
       },
       relations: {
         movie: true,
-        tickets: true,
         theater: true,
         showtimeseats: true,
       },

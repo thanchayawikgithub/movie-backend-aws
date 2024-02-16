@@ -42,7 +42,7 @@ export class MoviesController {
     return this.moviesService.remove(+id);
   }
 
-  @Get(':showId/showtime')
+  @Get('showtime/:showId')
   findShowTime(@Param('showId') showId: number) {
     return this.moviesService.findShowtime(showId);
   }
