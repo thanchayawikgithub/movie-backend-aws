@@ -36,7 +36,9 @@ export class MoviesService {
       relations: {
         categories: true,
         reviews: true,
-        showtimes: true,
+        showtimes: {
+          theater: true,
+        },
       },
     });
   }

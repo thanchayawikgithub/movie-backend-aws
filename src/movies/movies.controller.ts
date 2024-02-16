@@ -47,11 +47,9 @@ export class MoviesController {
     return this.moviesService.findShowtime(showId);
   }
 
-  @Get('image/:imageFile')
-  async getImageByFileNmae(
-    @Param('imageFile') imageFile: string,
-    @Res() res: Response,
-  ) {
-    res.sendFile(imageFile, { root: './uploadfile' });
+  @Get('image/:movieId')
+  async getMovieImage(@Param('movieId') movieId: string, @Res() res: Response) {
+    const movie = await this.moviesService.findOne(+movieId);
+    res.sendFile(movie.movieImage, { root: './uploadfile' });
   }
 }
