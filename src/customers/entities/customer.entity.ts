@@ -48,8 +48,4 @@ export class Customer {
 
   @OneToMany(() => Receipt, (receipt) => receipt.customer)
   receipts: Receipt[];
-
-  @OneToOne(() => Ticket, (ticket) => ticket.customer)
-  @JoinColumn({ name: 'ticketId' })
-  ticket: Ticket;
 }

@@ -51,10 +51,6 @@ export class Ticket {
   @JoinColumn({ name: 'seatId' })
   seat: Seat;
 
-  @OneToOne(() => Customer, (customer) => customer.ticket)
-  @JoinColumn({ name: 'cusId' })
-  customer: Customer;
-
   @ManyToOne(() => Receipt, (receipt) => receipt.tickets)
   @JoinColumn({ name: 'receiptId' })
   receipt: Receipt;

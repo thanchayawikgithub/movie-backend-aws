@@ -66,7 +66,6 @@ export class ReceiptsService {
       const seat = await this.seatRepository.findOne({
         where: { seatId: seatId },
       });
-      ticket.customer = customer;
       ticket.showtime = show;
       ticket.seat = seat;
       ticket.ticketPrice = seat.seatPrice;

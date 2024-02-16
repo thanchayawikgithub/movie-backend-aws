@@ -38,6 +38,17 @@ export class CustomersService {
     return customer;
   }
 
+  async findOneByEmail(email: string) {
+    const customer = await this.customerRepository.findOne({
+      where: { cusEmail: email },
+    });
+    console.log(customer);
+    if (!customer) {
+      throw new NotFoundException('customer not found');
+    }
+    return customer;
+  }
+
   update(id: number, updateCustomerDto: UpdateCustomerDto) {
     return `This action updates a #${id} customer`;
   }

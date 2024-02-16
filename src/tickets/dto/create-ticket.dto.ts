@@ -5,9 +5,6 @@ export class CreateTicketDto {
   ticketPrice: number;
 
   @IsNotEmpty()
-  customerId: number;
-
-  @IsNotEmpty()
   showId: number;
 
   @IsNotEmpty()

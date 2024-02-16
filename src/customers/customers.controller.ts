@@ -29,6 +29,10 @@ export class CustomersController {
   findOne(@Param('id') id: string) {
     return this.customersService.findOne(+id);
   }
+  @Get('email/:email')
+  findOneByEmail(@Param('email') email: string) {
+    return this.customersService.findOneByEmail(email);
+  }
 
   @Patch(':id')
   update(
