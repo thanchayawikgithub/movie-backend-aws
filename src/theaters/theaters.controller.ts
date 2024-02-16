@@ -30,6 +30,11 @@ export class TheatersController {
     return this.theatersService.findOne(+id);
   }
 
+  @Get('showtimes/movie/:movieId')
+  findShowtimeTheater(@Param('movieId') movieId: string) {
+    return this.theatersService.findShowtimeTheater(+movieId);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTheaterDto: UpdateTheaterDto) {
     return this.theatersService.update(+id, updateTheaterDto);
