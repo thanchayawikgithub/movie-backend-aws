@@ -20,8 +20,8 @@ export class ShowtimesService {
     return `This action returns all showtimes`;
   }
 
-  findOne(id: number) {
-    return this.showtimeRepository.findOne({
+  async findOne(id: number) {
+    return await this.showtimeRepository.findOne({
       where: { showId: id },
       relations: ['movie', 'theater', 'showtimeseats'],
     });
