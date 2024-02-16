@@ -47,7 +47,7 @@ export class MoviesController {
     return this.moviesService.findShowtime(showId);
   }
 
-  @Get('image/:movieId')
+  @Get(':movieId/image')
   async getMovieImage(@Param('movieId') movieId: string, @Res() res: Response) {
     const movie = await this.moviesService.findOne(+movieId);
     res.sendFile(movie.movieImage, { root: './uploadfile' });
