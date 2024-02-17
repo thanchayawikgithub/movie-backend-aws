@@ -51,7 +51,9 @@ export class MoviesService {
       relations: {
         movie: true,
         theater: true,
-        showtimeseats: true,
+        showtimeseats: {
+          seat: true,
+        },
       },
     });
   }

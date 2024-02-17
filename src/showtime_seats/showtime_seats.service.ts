@@ -23,10 +23,6 @@ export class ShowtimeSeatsService {
       relations: { theater: { seats: true } },
     });
 
-    // showtimes.forEach((showtime) => {
-    //   console.log(showtime.showId + ' : ' + showtime.showStart);
-    // });
-
     for (const showtime of showtimes) {
       try {
         for (const seat of showtime.theater.seats) {
