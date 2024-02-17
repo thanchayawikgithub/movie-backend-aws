@@ -20,6 +20,11 @@ export class ShowtimeSeatsController {
     return this.showtimeSeatsService.create(createShowtimeSeatDto);
   }
 
+  @Post('/createAll')
+  createAll() {
+    return this.showtimeSeatsService.createAll();
+  }
+
   @Get()
   findAll() {
     return this.showtimeSeatsService.findAll();
