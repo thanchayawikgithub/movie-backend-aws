@@ -13,8 +13,11 @@ export class FoodsService {
     return 'This action adds a new food';
   }
 
-  findAll() {
-    return `This action returns all foods`;
+  async findAll() {
+    const foods = await this.foodRepository.find({
+      relations: { foodcat: true },
+    });
+    return foods;
   }
   async findByCat(categoryId: number) {
     const foods = await this.foodRepository.find({
