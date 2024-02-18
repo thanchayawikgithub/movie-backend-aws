@@ -19,9 +19,7 @@ export class CustomersService {
     customer.cusEmail = createCustomerDto.cusEmail;
     customer.cusPassword = createCustomerDto.cusPassword;
     const saveCustomer = await this.customerRepository.save(customer);
-    return await this.customerRepository.findOne({
-      where: { cusId: customer.cusId },
-    });
+    return saveCustomer;
   }
 
   findAll() {
