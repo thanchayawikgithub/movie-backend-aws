@@ -10,7 +10,7 @@ export class CreateReceiptDto {
   recTotalPrice: number;
 
   @IsNotEmpty()
-  recPaymentMed: string;
+  recPaymentMethod: string;
 
   // @IsNotEmpty()
   // recPaymentStatus: boolean;

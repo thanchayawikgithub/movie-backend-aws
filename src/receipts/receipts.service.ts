@@ -39,7 +39,7 @@ export class ReceiptsService {
     if (!customer) {
       throw new NotFoundException('customer not found');
     }
-    if (receipt.recPaymentMed === 'credit card') {
+    if (receipt.recPaymentMethod === 'credit card') {
       const card = await this.cardRepository.findOne({
         where: { cardId: cardId },
       });
@@ -50,7 +50,7 @@ export class ReceiptsService {
     }
 
     receipt.recTotalPrice = createReceiptDto.recTotalPrice;
-    receipt.recPaymentMed = createReceiptDto.recPaymentMed;
+    receipt.recPaymentMethod = createReceiptDto.recPaymentMethod;
     receipt.customer = customer;
     const savedReceipt = await this.recieptRepository.save(receipt);
 

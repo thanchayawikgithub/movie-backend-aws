@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
 } from '@nestjs/common';
 import { FoodsService } from './foods.service';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
+import { Response } from 'express';
 
 @Controller('foods')
 export class FoodsController {
@@ -23,6 +25,17 @@ export class FoodsController {
   @Get()
   findAll() {
     return this.foodsService.findAll();
+  }
+
+  @Get('category/:categoryId')
+  findByCat(@Param('categoryId') categoryId: number) {
+    return this.foodsService.findByCat(categoryId);
+  }
+
+  @Get(':foodId/image')
+  async getFoodImage(@Param('foodId') foodId: string, @Res() res: Response) {
+    const food = await this.foodsService.findOne(+foodId);
+    res.sendFile(food.foodImage, { root: './uploadfile' });
   }
 
   @Get(':id')

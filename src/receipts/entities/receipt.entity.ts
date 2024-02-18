@@ -23,7 +23,7 @@ export class Receipt {
   recTotalPrice: number;
 
   @Column({ comment: 'วิธีการชำระเงิน' })
-  recPaymentMed: string;
+  recPaymentMethod: string;
 
   @Column({ comment: 'สถานะการจ่ายเงิน' })
   recPaymentStatus: boolean;
