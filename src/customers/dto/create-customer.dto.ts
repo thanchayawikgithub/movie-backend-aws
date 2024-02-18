@@ -2,7 +2,7 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateCustomerDto {
   @IsNotEmpty()
-  cusFirstName: string;
+  cusFirstname: string;
 
   @IsNotEmpty()
   cusLastname: string;

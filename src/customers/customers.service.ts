@@ -14,7 +14,7 @@ export class CustomersService {
 
   async create(createCustomerDto: CreateCustomerDto) {
     const customer = new Customer();
-    customer.cusFirstname = createCustomerDto.cusFirstName;
+    customer.cusFirstname = createCustomerDto.cusFirstname;
     customer.cusLastname = createCustomerDto.cusLastname;
     customer.cusEmail = createCustomerDto.cusEmail;
     customer.cusPassword = createCustomerDto.cusPassword;
