@@ -25,9 +25,6 @@ export class Receipt {
   @Column({ comment: 'วิธีการชำระเงิน' })
   recPaymentMethod: string;
 
-  @Column({ comment: 'สถานะการจ่ายเงิน' })
-  recPaymentStatus: boolean;
-
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
 
@@ -41,12 +38,12 @@ export class Receipt {
   @JoinColumn({ name: 'cusId' })
   customer: Customer;
 
-  @OneToMany(() => Ticket, (ticket) => ticket.receipt)
-  tickets: Ticket[];
-
   @ManyToOne(() => Card, (card) => card.receipts)
   @JoinColumn({ name: 'cardId' })
   card: Card;
+
+  @OneToMany(() => Ticket, (ticket) => ticket.receipt)
+  tickets: Ticket[];
 
   @OneToMany(() => ReceiptFood, (recfood) => recfood.receipt)
   recfoods: ReceiptFood[];

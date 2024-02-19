@@ -10,13 +10,15 @@ import { ReceiptFood } from 'src/receipt_foods/entities/receipt_food.entity';
 import { Ticket } from 'src/tickets/entities/ticket.entity';
 import { Seat } from 'src/seats/entities/seat.entity';
 import { Showtime } from 'src/showtimes/entities/showtime.entity';
-import { CreateTicketDto } from 'src/tickets/dto/create-ticket.dto';
+
 import { Food } from 'src/foods/entities/food.entity';
+import { v4 as uuidv4 } from 'uuid';
+import { ShowtimeSeat } from 'src/showtime_seats/entities/showtime_seat.entity';
 
 @Injectable()
 export class ReceiptsService {
   constructor(
-    @InjectRepository(Receipt) private recieptRepository: Repository<Receipt>,
+    @InjectRepository(Receipt) private receiptRepository: Repository<Receipt>,
     @InjectRepository(Customer)
     private customerRepository: Repository<Customer>,
     @InjectRepository(Ticket) private ticketRepository: Repository<Ticket>,
@@ -27,6 +29,8 @@ export class ReceiptsService {
     private seatRepository: Repository<Seat>,
     @InjectRepository(Showtime)
     private showtimeRepository: Repository<Showtime>,
+    @InjectRepository(ShowtimeSeat)
+    private showtimeSeatRepository: Repository<ShowtimeSeat>,
     @InjectRepository(Food)
     private foodRepository: Repository<Food>,
   ) {}
@@ -39,7 +43,7 @@ export class ReceiptsService {
     if (!customer) {
       throw new NotFoundException('customer not found');
     }
-    if (receipt.recPaymentMethod === 'credit card') {
+    if (receipt.recPaymentMethod === 'credit card' && createReceiptDto.cardId) {
       const card = await this.cardRepository.findOne({
         where: { cardId: cardId },
       });
@@ -52,25 +56,27 @@ export class ReceiptsService {
     receipt.recTotalPrice = createReceiptDto.recTotalPrice;
     receipt.recPaymentMethod = createReceiptDto.recPaymentMethod;
     receipt.customer = customer;
-    const savedReceipt = await this.recieptRepository.save(receipt);
+    const savedReceipt = await this.receiptRepository.save(receipt);
 
     for (const ticketDto of createReceiptDto.tickets) {
-      const { showId, seatId } = ticketDto;
+      const { showtimeSeatId } = ticketDto;
       const ticket = new Ticket();
-      const show = await this.showtimeRepository.findOne({
-        where: { showId: showId },
+      const showtimeSeat = await this.showtimeSeatRepository.findOne({
+        where: { showSeatId: showtimeSeatId },
+        relations: { seat: true, showtime: true },
       });
-      if (!show) {
-        throw new NotFoundException('showtime not found');
+      if (!showtimeSeat) {
+        throw new NotFoundException('showtime seat not found');
       }
-      const seat = await this.seatRepository.findOne({
-        where: { seatId: seatId },
-      });
-      ticket.showtime = show;
-      ticket.seat = seat;
-      ticket.ticketPrice = seat.seatPrice;
+      ticket.ticketNumber = uuidv4();
+      ticket.ticketReviewUrl = `http://localhost:5173/review/${ticket.ticketNumber}`;
+      ticket.showtime = showtimeSeat.showtime;
+      ticket.seat = showtimeSeat.seat;
+      ticket.ticketPrice = showtimeSeat.seat.seatPrice;
       ticket.receipt = savedReceipt;
-      const savedTicket = await this.ticketRepository.save(ticket);
+      await this.ticketRepository.save(ticket);
+      showtimeSeat.showSeatStatus = false;
+      await this.showtimeSeatRepository.save(showtimeSeat);
     }
 
     if (createReceiptDto.receiptFoods.length > 0) {
@@ -87,10 +93,18 @@ export class ReceiptsService {
         receiptFood.recFoodPrice = recFoodDto.recFoodPrice;
         receiptFood.recFoodQty = recFoodDto.recFoodQty;
         receiptFood.receipt = savedReceipt;
-        const savedReceiptFood =
-          await this.receiptFoodRepository.save(receiptFood);
+
+        await this.receiptFoodRepository.save(receiptFood);
       }
     }
+    return this.receiptRepository.findOne({
+      where: { receiptId: savedReceipt.receiptId },
+      relations: {
+        tickets: true,
+        recfoods: true,
+        customer: true,
+      },
+    });
   }
 
   findAll() {

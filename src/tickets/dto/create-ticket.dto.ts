@@ -1,12 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
+import { ShowtimeSeat } from 'src/showtime_seats/entities/showtime_seat.entity';
 
 export class CreateTicketDto {
   @IsNotEmpty()
-  ticketPrice: number;
-
-  @IsNotEmpty()
-  showId: number;
-
-  @IsNotEmpty()
-  seatId: number;
+  showtimeSeatId: number;
 }

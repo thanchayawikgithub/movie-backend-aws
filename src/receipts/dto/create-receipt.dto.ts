@@ -12,11 +12,10 @@ export class CreateReceiptDto {
   @IsNotEmpty()
   recPaymentMethod: string;
 
-  // @IsNotEmpty()
-  // recPaymentStatus: boolean;
-
   @IsNotEmpty()
   cusId: number;
+
+  cardId: number;
 
   @IsNotEmpty()
   showId: number;
@@ -25,6 +24,4 @@ export class CreateReceiptDto {
 
   @IsNotEmpty()
   tickets: CreateTicketDto[];
-
-  cardId: number;
 }

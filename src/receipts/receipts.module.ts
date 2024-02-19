@@ -10,6 +10,7 @@ import { ReceiptFood } from 'src/receipt_foods/entities/receipt_food.entity';
 import { Showtime } from 'src/showtimes/entities/showtime.entity';
 import { Seat } from 'src/seats/entities/seat.entity';
 import { Food } from 'src/foods/entities/food.entity';
+import { ShowtimeSeat } from 'src/showtime_seats/entities/showtime_seat.entity';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { Food } from 'src/foods/entities/food.entity';
       Showtime,
       Seat,
       Food,
+      ShowtimeSeat,
     ]),
   ],
   controllers: [ReceiptsController],
