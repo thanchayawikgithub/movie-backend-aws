@@ -4,7 +4,7 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Customer } from './entities/customer.entity';
 import { Repository } from 'typeorm';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class CustomersService {
   constructor(
@@ -17,7 +17,9 @@ export class CustomersService {
     customer.cusFirstname = createCustomerDto.cusFirstname;
     customer.cusLastname = createCustomerDto.cusLastname;
     customer.cusEmail = createCustomerDto.cusEmail;
-    customer.cusPassword = createCustomerDto.cusPassword;
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(createCustomerDto.cusPassword, salt);
+    customer.cusPassword = hash;
     const saveCustomer = await this.customerRepository.save(customer);
     return saveCustomer;
   }
