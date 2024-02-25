@@ -40,7 +40,6 @@ export class Ticket {
   updateDate: Date;
 
   @OneToOne(() => Review, (review) => review.ticket)
-  @JoinColumn({ name: 'reviewId' })
   review: Review;
 
   @ManyToOne(() => Showtime, (showtime) => showtime.tickets)

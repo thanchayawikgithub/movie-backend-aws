@@ -21,7 +21,7 @@ export class Review {
   @Column({ comment: 'เรทติ้งรีวิว' })
   reviewRating: number;
 
-  @Column({ comment: 'ความคิดเห็นรีวิว' })
+  @Column({ comment: 'ความคิดเห็นรีวิว', nullable: true })
   reviewComment: string;
 
   @CreateDateColumn({ comment: 'วันที่สร้าง' })

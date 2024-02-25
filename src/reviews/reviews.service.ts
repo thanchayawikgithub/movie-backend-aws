@@ -24,6 +24,7 @@ export class ReviewsService {
     const review = new Review();
     const ticket = await this.ticketRepository.findOne({
       where: { ticketId: ticketId },
+      relations: { showtime: { movie: true } },
     });
     if (!ticket) {
       throw new NotFoundException('ticket not found');
@@ -41,7 +42,8 @@ export class ReviewsService {
     review.reviewRating = createReviewDto.reviewRating;
     review.reviewComment = createReviewDto.reviewComment;
     review.ticket = ticket;
-    const saveReview = await this.reviewRepository.save(review);
+    review.movie = ticket.showtime.movie;
+    return await this.reviewRepository.save(review);
   }
 
   findAll() {
