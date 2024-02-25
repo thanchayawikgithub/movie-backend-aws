@@ -124,6 +124,28 @@ export class ReceiptsService {
     });
   }
 
+  async findAllByCusId(cusId: number) {
+    return await this.receiptRepository.find({
+      where: {
+        customer: {
+          cusId: cusId,
+        },
+      },
+      relations: {
+        customer: true,
+        tickets: {
+          showtime: {
+            movie: true,
+          },
+          seat: true,
+        },
+        recfoods: {
+          food: true,
+        },
+      },
+    });
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} receipt`;
   }

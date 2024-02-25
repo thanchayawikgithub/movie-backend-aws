@@ -25,6 +25,11 @@ export class ReceiptsController {
     return this.receiptsService.findAll();
   }
 
+  @Get('customer/:cusId')
+  findAllByCusId(@Param('cusId') cusId: string) {
+    return this.receiptsService.findAllByCusId(+cusId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.receiptsService.findOne(+id);
