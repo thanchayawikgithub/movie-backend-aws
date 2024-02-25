@@ -111,8 +111,15 @@ export class ReceiptsService {
     return await this.receiptRepository.find({
       relations: {
         customer: true,
-        tickets: true,
-        recfoods: true,
+        tickets: {
+          showtime: {
+            movie: true,
+          },
+          seat: true,
+        },
+        recfoods: {
+          food: true,
+        },
       },
     });
   }
