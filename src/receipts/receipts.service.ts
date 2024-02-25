@@ -107,8 +107,14 @@ export class ReceiptsService {
     });
   }
 
-  findAll() {
-    return `This action returns all receipts`;
+  async findAll() {
+    return await this.receiptRepository.find({
+      relations: {
+        customer: true,
+        tickets: true,
+        recfoods: true,
+      },
+    });
   }
 
   findOne(id: number) {
