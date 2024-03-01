@@ -55,7 +55,7 @@ export class ReviewsService {
   findOne(id: number) {
     return `This action returns a #${id} review`;
   }
-  async findOneByMovieId(movieId: number) {
+  async findByMovieId(movieId: number) {
     const review = this.reviewRepository.find({
       where: { movie: { movieId: movieId } },
       relations: {
