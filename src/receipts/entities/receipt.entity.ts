@@ -19,6 +19,9 @@ export class Receipt {
   @PrimaryGeneratedColumn({ comment: 'รหัสใบเสร็จ' })
   receiptId: number;
 
+  @Column({ comment: 'หมายเลขใบเสร็จ' })
+  recNumber: string;
+
   @Column({ comment: 'ราคารวม' })
   recTotalPrice: number;
 

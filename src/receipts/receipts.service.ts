@@ -52,7 +52,7 @@ export class ReceiptsService {
       }
       receipt.card = card;
     }
-
+    receipt.recNumber = uuidv4();
     receipt.recTotalPrice = createReceiptDto.recTotalPrice;
     receipt.recPaymentMethod = createReceiptDto.recPaymentMethod;
     receipt.customer = customer;

@@ -37,9 +37,8 @@ export class Seat {
   @UpdateDateColumn({ comment: 'วันที่อัพเดท' })
   updateDate: Date;
 
-  @OneToOne(() => Ticket, (tickets) => tickets.seat)
-  @JoinColumn({ name: 'ticketId' })
-  ticket: Ticket;
+  @OneToMany(() => Ticket, (tickets) => tickets.seat)
+  tickets: Ticket[];
 
   @ManyToOne(() => Theater, (theater) => theater.seats)
   @JoinColumn({ name: 'theaterId' })
