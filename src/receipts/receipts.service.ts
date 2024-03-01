@@ -43,13 +43,19 @@ export class ReceiptsService {
     if (!customer) {
       throw new NotFoundException('customer not found');
     }
-    if (receipt.recPaymentMethod === 'credit card' && createReceiptDto.cardId) {
+    console.log(createReceiptDto.cardId);
+    if (
+      createReceiptDto.recPaymentMethod === 'credit card' &&
+      createReceiptDto.cardId
+    ) {
+      console.log('find card');
       const card = await this.cardRepository.findOne({
         where: { cardId: cardId },
       });
       if (!card) {
         throw new NotFoundException('card not found');
       }
+      console.log(card);
       receipt.card = card;
     }
     receipt.recNumber = uuidv4();
