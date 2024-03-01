@@ -18,6 +18,8 @@ export class ReviewsService {
     private customerRepository: Repository<Customer>,
     @InjectRepository(Ticket)
     private ticketRepository: Repository<Ticket>,
+    @InjectRepository(Movie)
+    private movieRepository: Repository<Movie>,
   ) {}
   async create(createReviewDto: CreateReviewDto) {
     const { ticketId, cusId } = createReviewDto;
@@ -53,7 +55,17 @@ export class ReviewsService {
   findOne(id: number) {
     return `This action returns a #${id} review`;
   }
-
+  async findOneByMovieId(movieId: number) {
+    const review = this.reviewRepository.find({
+      where: { movie: { movieId: movieId } },
+      relations: {
+        customer: true,
+      },
+      order: {
+        creatDate: 'DESC',
+      },
+    });
+  }
   update(id: number, updateReviewDto: UpdateReviewDto) {
     return `This action updates a #${id} review`;
   }

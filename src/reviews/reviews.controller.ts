@@ -29,6 +29,10 @@ export class ReviewsController {
   findOne(@Param('id') id: string) {
     return this.reviewsService.findOne(+id);
   }
+  @Get('id/:movieId')
+  findOneByMovieId(@Param('movieId') movieId: number) {
+    return this.reviewsService.findOneByMovieId(movieId);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateReviewDto: UpdateReviewDto) {

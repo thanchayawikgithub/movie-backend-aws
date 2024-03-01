@@ -127,6 +127,9 @@ export class ReceiptsService {
           food: true,
         },
       },
+      order: {
+        creatDate: 'DESC',
+      },
     });
   }
 
@@ -148,6 +151,9 @@ export class ReceiptsService {
         recfoods: {
           food: true,
         },
+      },
+      order: {
+        creatDate: 'DESC',
       },
     });
   }
