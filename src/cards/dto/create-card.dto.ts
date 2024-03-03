@@ -16,7 +16,4 @@ export class CreateCardDto {
 
   @IsNotEmpty()
   cusId: number;
-
-  @IsNotEmpty()
-  customer: CreateCustomerDto;
 }
