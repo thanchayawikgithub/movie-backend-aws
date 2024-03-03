@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -20,12 +20,15 @@ export class CardsService {
     const customer = await this.customerRepository.findOne({
       where: { cusId: cusId },
     });
+    if (!customer) {
+      throw new NotFoundException('customer not found');
+    }
     card.cardHolderName = createCardDto.cardHolderName;
     card.cardNumber = createCardDto.cardNumber;
     card.cardExpiredDate = createCardDto.cardExpiredDate;
     card.cardCvv = createCardDto.cardCvv;
     card.customer = customer;
-    return this.cardRepository.save(card);
+    return await this.cardRepository.save(card);
   }
 
   findAll() {
