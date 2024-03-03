@@ -29,6 +29,7 @@ export class ReviewsController {
   findOne(@Param('id') id: string) {
     return this.reviewsService.findOne(+id);
   }
+
   @Get('movie/:movieId')
   findByMovieId(@Param('movieId') movieId: number) {
     return this.reviewsService.findByMovieId(movieId);

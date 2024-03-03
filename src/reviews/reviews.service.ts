@@ -55,6 +55,7 @@ export class ReviewsService {
   findOne(id: number) {
     return `This action returns a #${id} review`;
   }
+
   async findByMovieId(movieId: number) {
     const review = this.reviewRepository.find({
       where: { movie: { movieId: movieId } },
@@ -65,7 +66,9 @@ export class ReviewsService {
         creatDate: 'DESC',
       },
     });
+    return review;
   }
+
   update(id: number, updateReviewDto: UpdateReviewDto) {
     return `This action updates a #${id} review`;
   }

@@ -29,7 +29,7 @@ export class TicketsService {
       where: { ticketNumber: ticketNumber },
       relations: {
         review: true,
-        showtime: { movie: true },
+        showtime: { movie: { categories: true } },
       },
     });
 
