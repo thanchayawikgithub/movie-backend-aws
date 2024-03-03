@@ -33,6 +33,9 @@ export class Movie {
   @Column({ comment: 'ตัวอย่างหนัง' })
   movieTrailer: string;
 
+  @Column({ comment: 'รูปภาพพื้นหลัง', nullable: true })
+  movieBackground: string;
+
   @CreateDateColumn({ comment: 'วันที่สร้าง' })
   creatDate: Date;
 
