@@ -31,12 +31,17 @@ import { FoodCategory } from './food_categories/entities/food_category.entity';
 import { ReceiptFoodsModule } from './receipt_foods/receipt_foods.module';
 import { ReceiptFood } from './receipt_foods/entities/receipt_food.entity';
 import { AuthModule } from './auth/auth.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'movie.db',
+      type: 'mysql',
+      host: 'localhost',
+      port: 3307,
+      database: 'movie',
+      username: 'root',
+      password: 'password',
       entities: [
         Movie,
         Showtime,
@@ -88,4 +93,6 @@ import { AuthModule } from './auth/auth.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}

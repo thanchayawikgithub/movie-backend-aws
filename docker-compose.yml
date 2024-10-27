@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db-movie
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: movie
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
