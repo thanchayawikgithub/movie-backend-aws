@@ -37,10 +37,10 @@ import { DataSource } from 'typeorm';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3307,
-      database: 'movie',
-      username: 'root',
+      host: 'project-db.cny88uokewf5.ap-southeast-1.rds.amazonaws.com',
+      port: 3306,
+      database: 'project',
+      username: 'admin',
       password: 'password',
       entities: [
         Movie,
